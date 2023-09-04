@@ -285,17 +285,20 @@ class CountdownTimer:
             self.root.after(1000, self.countdown)
         elif self.running and self.session_completed >= self.countdown_from:
             # update the daily elapsed
-            self.update_daily_elapsed()
+            self.pause_timer()
             # enable reset and disable start & pause button
             self.button_start["state"] = "disable"
             self.button_reset["state"] = "normal"
             self.button_pause["state"] = "disable"
 
+            self.session_completed = 0
+            self.session_already_counted = 0
+
+            self.root.focus_force()
+            self.root.lift()
             self.label_countdown_timer.config(text="Time's up!")
             winsound.Beep(1000, 1000)
-            self.root.focus_force()
             self.running = False
-
 
 
 
