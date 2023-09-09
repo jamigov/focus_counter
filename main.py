@@ -181,6 +181,12 @@ class CountdownTimer:
         
 
     def reset_timer(self):
+        # if the day changed, update everything 
+        self.today_recorded, self.last_worked_recorded = self.get_last_records()
+        if self.today_recorded == 0:
+            # initialize session parameters
+            self.session_completed = 0
+            self.session_already_counted = 0
 
         # Set countdown to default
         self.reset_UI()
